@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nit.city.dao.ImageMapper">
+    <resultMap id="BaseResultMap" type="com.nit.city.bean.Image">
+        <id column="image_id" jdbcType="INTEGER" property="imageId"/>
+        <result column="image_name" jdbcType="VARCHAR" property="imageName"/>
+        <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="image_description" jdbcType="VARCHAR" property="imageDescription"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="position_id" jdbcType="INTEGER" property="positionId"/>
+        <result column="result_id" jdbcType="INTEGER" property="resultId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="coordinate_id" jdbcType="INTEGER" property="coordinateId"/>
+        <result column="image_time" jdbcType="TIMESTAMP" property="imageTime"/>
+        <collection property="position" ofType="com.nit.city.bean.Position">
+            <id column="position_id" property="positionId"/>
+            <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+            <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+            <result column="district_id" jdbcType="INTEGER" property="districtId"/>
+        </collection>
+        <collection property="result" ofType="com.nit.city.bean.Result">
+            <id column="result_id" property="resultId"/>
+            <result column="result_name" jdbcType="VARCHAR" property="resultName"/>
+        </collection>
+        <collection property="user" ofType="com.nit.city.bean.User">
+            <id column="user_id" property="userId"/>
+            <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        </collection>
+        <collection property="coordinate" ofType="com.nit.city.bean.Coordinate">
+            <id column="coordinate_id" property="coordinateId"/>
+            <result column="latitude" jdbcType="VARCHAR" property="latitude"/>
+            <result column="longitude" jdbcType="VARCHAR" property="longitude"/>
+        </collection>
+        <collection property="province" ofType="com.nit.city.bean.Province">
+            <id column="province_id" property="provinceId"/>
+            <result column="province" jdbcType="VARCHAR" property="province"/>
+        </collection>
+        <collection property="city" ofType="com.nit.city.bean.City">
+            <id column="city_id" property="cityId"/>
+            <result column="city" jdbcType="VARCHAR" property="city"/>
+            <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+        </collection>
+        <collection property="district" ofType="com.nit.city.bean.District">
+            <id column="district_id" property="districtId"/>
+            <result column="district" jdbcType="VARCHAR" property="district"/>
+            <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        </collection>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    image_id, image_name, image_url, status, image_description, source, position_id, 
+    result_id, user_id, coordinate_id, image_time
+  </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select
+    city_image.*,city_position.*,city_result.result_name,city_user.user_name,city_coordinate.latitude,
+    city_coordinate.longitude,city_province.province,city_city.city,city_district.district
+    from city_image
+    inner join city_result
+    on (city_image.result_id = city_result.result_id)
+    inner join city_user
+    on (city_image.user_id = city_user.user_id)
+    inner join city_coordinate
+    on (city_image.coordinate_id = city_coordinate.coordinate_id)
+	inner join city_position
+    on (city_image.position_id = city_position.position_id)
+	inner join city_province
+	on (city_position.province_id = city_province.province_id)
+	inner join city_city
+	on (city_position.city_id = city_city.city_id)
+	inner join city_district
+	on (city_position.district_id = city_district.district_id)
+  </select>
+    <select id="selectBySourceAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    city_image.*,city_position.*,city_result.result_name,city_user.user_name,city_coordinate.latitude,
+    city_coordinate.longitude,city_province.province,city_city.city,city_district.district
+    from city_image
+    inner join city_result
+    on (city_image.result_id = city_result.result_id)
+    inner join city_user
+    on (city_image.user_id = city_user.user_id)
+    inner join city_coordinate
+    on (city_image.coordinate_id = city_coordinate.coordinate_id)
+	inner join city_position
+    on (city_image.position_id = city_position.position_id)
+	inner join city_province
+	on (city_position.province_id = city_province.province_id)
+	inner join city_city
+	on (city_position.city_id = city_city.city_id)
+	inner join city_district
+	on (city_position.district_id = city_district.district_id)
+    where city_image.source = #{source}
+  </select>
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    city_image.*,city_position.*,city_result.result_name,city_user.user_name,city_coordinate.latitude,
+    city_coordinate.longitude,city_province.province,city_city.city,city_district.district
+    from city_image
+    inner join city_result
+    on (city_image.result_id = city_result.result_id)
+    inner join city_user
+    on (city_image.user_id = city_user.user_id)
+    inner join city_coordinate
+    on (city_image.coordinate_id = city_coordinate.coordinate_id)
+	inner join city_position
+    on (city_image.position_id = city_position.position_id)
+	inner join city_province
+	on (city_position.province_id = city_province.province_id)
+	inner join city_city
+	on (city_position.city_id = city_city.city_id)
+	inner join city_district
+	on (city_position.district_id = city_district.district_id)
+    where city_image.user_id = #{userId}
+  </select>
+    <select id="selectByExample" parameterType="com.nit.city.bean.ImageExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from city_image
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from city_image
+        where image_id = #{imageId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from city_image
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.nit.city.bean.ImageExample">
+        delete from city_image
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.nit.city.bean.Image">
+    insert into city_image (image_id, image_name, image_url, 
+      status, image_description, source, 
+      position_id, result_id, user_id, 
+      coordinate_id, image_time)
+    values (#{imageId,jdbcType=INTEGER}, #{imageName,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{imageDescription,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{positionId,jdbcType=INTEGER}, #{resultId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{coordinateId,jdbcType=INTEGER}, #{imageTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.nit.city.bean.Image">
+        insert into city_image
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="imageId != null">
+                image_id,
+            </if>
+            <if test="imageName != null">
+                image_name,
+            </if>
+            <if test="imageUrl != null">
+                image_url,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="imageDescription != null">
+                image_description,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="positionId != null">
+                position_id,
+            </if>
+            <if test="resultId != null">
+                result_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="coordinateId != null">
+                coordinate_id,
+            </if>
+            <if test="imageTime != null">
+                image_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="imageId != null">
+                #{imageId,jdbcType=INTEGER},
+            </if>
+            <if test="imageName != null">
+                #{imageName,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null">
+                #{imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="imageDescription != null">
+                #{imageDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="positionId != null">
+                #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="resultId != null">
+                #{resultId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="coordinateId != null">
+                #{coordinateId,jdbcType=INTEGER},
+            </if>
+            <if test="imageTime != null">
+                #{imageTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.nit.city.bean.ImageExample" resultType="java.lang.Long">
+        select count(*) from city_image
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update city_image
+        <set>
+            <if test="record.imageId != null">
+                image_id = #{record.imageId,jdbcType=INTEGER},
+            </if>
+            <if test="record.imageName != null">
+                image_name = #{record.imageName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.imageUrl != null">
+                image_url = #{record.imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.imageDescription != null">
+                image_description = #{record.imageDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="record.source != null">
+                source = #{record.source,jdbcType=VARCHAR},
+            </if>
+            <if test="record.positionId != null">
+                position_id = #{record.positionId,jdbcType=INTEGER},
+            </if>
+            <if test="record.resultId != null">
+                result_id = #{record.resultId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.coordinateId != null">
+                coordinate_id = #{record.coordinateId,jdbcType=INTEGER},
+            </if>
+            <if test="record.imageTime != null">
+                image_time = #{record.imageTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update city_image
+        set image_id = #{record.imageId,jdbcType=INTEGER},
+        image_name = #{record.imageName,jdbcType=VARCHAR},
+        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=VARCHAR},
+        image_description = #{record.imageDescription,jdbcType=VARCHAR},
+        source = #{record.source,jdbcType=VARCHAR},
+        position_id = #{record.positionId,jdbcType=INTEGER},
+        result_id = #{record.resultId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        coordinate_id = #{record.coordinateId,jdbcType=INTEGER},
+        image_time = #{record.imageTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.nit.city.bean.Image">
+        update city_image
+        <set>
+            <if test="imageName != null">
+                image_name = #{imageName,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null">
+                image_url = #{imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="imageDescription != null">
+                image_description = #{imageDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="positionId != null">
+                position_id = #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="resultId != null">
+                result_id = #{resultId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="coordinateId != null">
+                coordinate_id = #{coordinateId,jdbcType=INTEGER},
+            </if>
+            <if test="imageTime != null">
+                image_time = #{imageTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where image_id = #{imageId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.nit.city.bean.Image">
+    update city_image
+    set image_name = #{imageName,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      image_description = #{imageDescription,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      position_id = #{positionId,jdbcType=INTEGER},
+      result_id = #{resultId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      coordinate_id = #{coordinateId,jdbcType=INTEGER},
+      image_time = #{imageTime,jdbcType=TIMESTAMP}
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+</mapper>
