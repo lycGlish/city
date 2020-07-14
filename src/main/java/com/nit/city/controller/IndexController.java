@@ -16,9 +16,11 @@ import com.nit.city.util.CityUtil;
 import com.nit.city.util.JsonToString;
 import com.nit.city.util.PointUtil;
 import com.nit.city.util.PythonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +36,7 @@ import java.util.List;
  * @author lyc
  */
 @Controller
+@Slf4j
 public class IndexController {
 
     @Autowired
@@ -52,11 +55,11 @@ public class IndexController {
     private UploadService uploadService;
 
     /**
-     * 查询所有摄像头上传图片
+     * 查询所有图片
      *
-     * @return 返回所有摄像头上传图片
+     * @return 返回所有图片
      */
-    @RequestMapping("/getAllImage")
+    @GetMapping("/getAllImage")
     @ResponseBody
     public List<Image> getAllCameraImage() {
         return imageSevice.getAllImage();
@@ -64,11 +67,15 @@ public class IndexController {
 
     /**
      * 主页上传图片
-     *
+     * @param imageName 图片名称
      * @param file 前端传进的图片
+     * @param province 省份
+     * @param city 城市
+     * @param district 区/县
+     * @param request
      * @return 成功跳转至查看所有自己上传图片页面，失败依旧在本页面
      */
-    @RequestMapping("/uploadImage")
+    @PostMapping("/uploadImage")
     public String uploadImage(String imageName, MultipartFile file
             , Integer province, Integer city, Integer district, HttpServletRequest request) {
         // 封装image类
@@ -126,6 +133,7 @@ public class IndexController {
         String longitude = null;
         File localFile;
         try {
+            // 判断上传图片是否自带经纬度坐标与时间
             localFile = File.createTempFile("tmp", null);
             file.transferTo(localFile);
             Metadata metadata = ImageMetadataReader.readMetadata(localFile);
@@ -134,23 +142,23 @@ public class IndexController {
                     String tagName = tag.getTagName();  //标签名
                     String desc = tag.getDescription(); //标签信息
                     switch (tagName) {
-                        case "Image Height":
-                            System.out.println("图片高度: " + desc);
-                            break;
-                        case "Image Width":
-                            System.out.println("图片宽度: " + desc);
-                            break;
+//                        case "Image Height":
+//                            System.out.println("图片高度: " + desc);
+//                            break;
+//                        case "Image Width":
+//                            System.out.println("图片宽度: " + desc);
+//                            break;
                         case "Date/Time Original":
-                            System.out.println("拍摄时间: " + desc);
+                            log.info("拍摄时间:" + desc);
                             break;
                         case "GPS Latitude":
                             longitude = PointUtil.pointToLatlong(desc);
-                            System.err.println("纬度 : " + PointUtil.pointToLatlong(desc));
+                            log.info("纬度 : " + PointUtil.pointToLatlong(desc));
 //                            System.err.println("纬度(度分秒格式) : " + PointUtil.pointToLatlong(desc));
                             break;
                         case "GPS Longitude":
                             latitude = PointUtil.pointToLatlong(desc);
-                            System.err.println("经度: " + PointUtil.pointToLatlong(desc));
+                            log.info("经度: " + PointUtil.pointToLatlong(desc));
 //                            System.err.println("经度(度分秒格式): " + PointUtil.pointToLatlong(desc));
                             break;
                     }
@@ -176,11 +184,11 @@ public class IndexController {
             JSONObject json = JSONObject.parseObject(coordinateApi);
             // 搜索到用户输入的街道信息
             if (json.get("status").toString().equals("0")) {
-                System.out.println("查找到匹配的经纬度！");
+                log.info("查找到匹配的经纬度！");
                 latitude = json.getJSONObject("result").getJSONObject("location").getString("lng");
                 longitude = json.getJSONObject("result").getJSONObject("location").getString("lat");
             } else {
-                System.out.println("未找到相匹配的经纬度！");
+                log.info("未找到相匹配的经纬度！");
                 // 没有搜索到用户输入的街道信息，填入省市县坐标
                 coordinateApi = CityUtil.httpUrlConnectionPost(provinceName + cityName + districtName);
                 coordinateApi = coordinateApi.substring(27);
@@ -190,19 +198,11 @@ public class IndexController {
                     latitude = json.getJSONObject("result").getJSONObject("location").getString("lng");
                     longitude = json.getJSONObject("result").getJSONObject("location").getString("lat");
                 } else {
-                    System.out.println("程序错误!");
+                    log.info("程序错误！");
                 }
             }
         }
 
-
-        // 坐标长度过长后面则省略
-//        if(latitude.length()>12){
-//            latitude = latitude.substring(0,12);
-//        }
-//        if(longitude.length()>12){
-//            longitude = longitude.substring(0,12);
-//        }
         // 传入经纬度查询是否存在
         Coordinate coordinate = coordinateService.getCoordinate(latitude, longitude);
         Integer coordinateId = null;
@@ -245,13 +245,13 @@ public class IndexController {
                     message.setResult("冰雪");
                     break;
                 default:
-                    System.out.println("错误");
+                    log.info("错误");
             }
             int uploadMessage = indexService.uploadMessage(message);
             if (uploadMessage == 0) {
-                System.out.println("发布消息失败");
+                log.info("发布消息失败");
             } else {
-                System.out.println("发布消息成功");
+                log.info("发布消息成功");
             }
         }
         // 将整体image信息存入数据库
@@ -266,40 +266,40 @@ public class IndexController {
     }
 
     /*
-    页面跳转
+     * 页面跳转
      */
 
-    @RequestMapping("/status")
+    @GetMapping("/status")
     public String status() {
         return "status";
     }
 
-    @RequestMapping("/500")
+    @GetMapping("/500")
     public String wrong() {
         return "error/500";
     }
 
-    @RequestMapping("/404")
+    @GetMapping("/404")
     public String lost() {
         return "error/404";
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index1() {
         return "index";
     }
 
-    @RequestMapping("/index")
+    @GetMapping("/index")
     public String index() {
         return "index";
     }
 
-    @RequestMapping("/test/city")
+    @GetMapping("/test/city")
     public String city() {
         return "test/city";
     }
 
-    @RequestMapping("/test")
+    @GetMapping("/test")
     public String test() {
         return "test/test";
     }

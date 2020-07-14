@@ -23,29 +23,22 @@ public class PythonUtil {
 
     public static String httpUrlConnectionPost(String url) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        try {
-            // 给访问路径加上传递的参数 url
-            String do_url = SERVICE_URL + url;
-            // api设定的是做post方法,可以更改为get
-            HttpGet httpGet = new HttpGet(do_url);
-            // 获取执行后的response
-            CloseableHttpResponse response = httpClient.execute(httpGet);
-            try {
-                StatusLine statusLine = response.getStatusLine();
-                int statusCode = statusLine.getStatusCode();
-                // 判断访问连接状态是不是201
-                if (statusCode == SUCCESS) {
-                    HttpEntity entity = response.getEntity();
-                    return EntityUtils.toString(entity, "utf-8");
-                } else {
-                    return null;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                response.close();
+        // 给访问路径加上传递的参数 url
+        String do_url = SERVICE_URL + url;
+        // api设定的是做post方法,可以更改为get
+        HttpGet httpGet = new HttpGet(do_url);
+        // 获取执行后的response
+        try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
+            StatusLine statusLine = response.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+            // 判断访问连接状态是不是201
+            if (statusCode == SUCCESS) {
+                HttpEntity entity = response.getEntity();
+                return EntityUtils.toString(entity, "utf-8");
+            } else {
+                return null;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

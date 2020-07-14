@@ -530,18 +530,18 @@
     map.centerAndZoom(point, 12);
 
     // 根据ip定位地图
-    // var geolocation = new BMap.Geolocation();
-    // geolocation.getCurrentPosition(function (r) {
-    //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-    //         var mk = new BMap.Marker(r.point);
-    //         // map.addOverlay(mk);
-    //         map.panTo(r.point);
-    //         document.getElementById('location').innerHTML += r.point.lng + "," + r.point.lat;
-    //         // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-    //     } else {
-    //         alert('failed' + this.getStatus());
-    //     }
-    // }, {enableHighAccuracy: true});
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function (r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            var mk = new BMap.Marker(r.point);
+            // map.addOverlay(mk);
+            map.panTo(r.point);
+            document.getElementById('location').innerHTML += r.point.lng + "," + r.point.lat;
+            // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+        } else {
+            alert('failed' + this.getStatus());
+        }
+    }, {enableHighAccuracy: true});
     //关于状态码
     //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
     //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。

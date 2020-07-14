@@ -6,12 +6,10 @@ import com.nit.city.bean.*;
 import com.nit.city.service.*;
 import com.nit.city.util.CityUtil;
 import com.nit.city.util.Md5Util;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +33,7 @@ import java.util.Map;
  * @author lyc
  */
 @Controller
+@Slf4j
 @RequestMapping("manager")
 public class ManagerController {
 
@@ -65,7 +64,7 @@ public class ManagerController {
      *
      * @param cameraId 消息id
      */
-    @RequestMapping("/updateCamera")
+    @PostMapping("/updateCamera")
     public String updateCamera(@RequestParam("modal_cameraName") String cameraName, @RequestParam("modal_cameraId") Integer cameraId
             , HttpServletRequest request) {
         Camera camera = new Camera();
@@ -86,7 +85,7 @@ public class ManagerController {
      *
      * @param result 消息id
      */
-    @RequestMapping("/updateImage")
+    @PostMapping("/updateImage")
     public String updateImage(@RequestParam("modal_result") Integer result, @RequestParam("modal_imageId") Integer imageId
             , HttpServletRequest request) {
         Image image = new Image();
@@ -111,7 +110,7 @@ public class ManagerController {
      *
      * @param result 消息id
      */
-    @RequestMapping("/updateMessage")
+    @PostMapping("/updateMessage")
     public String updateMessage(@RequestParam("modal_result") String result, @RequestParam("modal_messageId") Integer messageId
             , HttpServletRequest request) {
         Message message = new Message();
@@ -140,7 +139,7 @@ public class ManagerController {
      *
      * @param positionId 位置id
      */
-    @RequestMapping(value = "/deletePosition", method = RequestMethod.GET)
+    @GetMapping("/deletePosition")
     @ResponseBody
     public void deletePosition(@RequestParam("positionId") Integer positionId) {
         positionService.deletePosition(positionId);
@@ -151,7 +150,7 @@ public class ManagerController {
      *
      * @param imageId 消息id
      */
-    @RequestMapping(value = "/deleteImage", method = RequestMethod.GET)
+    @GetMapping("/deleteImage")
     @ResponseBody
     public void deleteImage(@RequestParam("imageId") Integer imageId) {
         imageSevice.deleteImage(imageId);
@@ -162,7 +161,7 @@ public class ManagerController {
      *
      * @param messageId 消息id
      */
-    @RequestMapping(value = "/deleteMessage", method = RequestMethod.GET)
+    @GetMapping("/deleteMessage")
     @ResponseBody
     public void deleteMessage(@RequestParam("messageId") Integer messageId) {
         managerService.deleteMessage(messageId);
@@ -173,7 +172,7 @@ public class ManagerController {
      *
      * @param cameraId 摄像头id
      */
-    @RequestMapping(value = "/deleteCamera", method = RequestMethod.GET)
+    @GetMapping("/deleteCamera")
     @ResponseBody
     public void deleteCamera(@RequestParam("cameraId") Integer cameraId) {
         managerService.deleteCamera(cameraId);
@@ -184,7 +183,7 @@ public class ManagerController {
      *
      * @param userId 用户id
      */
-    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+    @GetMapping("/deleteUser")
     @ResponseBody
     public void deleteUser(@RequestParam("userId") Integer userId) {
         managerService.deleteUser(userId);
@@ -199,11 +198,10 @@ public class ManagerController {
      *
      * @return 返回所有摄像头上传图片
      */
-    @RequestMapping("/getAllPosition")
+    @GetMapping("/getAllPosition")
     @ResponseBody
     public List<Position> getAllPosition() {
-        List<Position> positions = positionService.getAllPosition();
-        return positions;
+        return positionService.getAllPosition();
     }
 
     /**
@@ -211,11 +209,10 @@ public class ManagerController {
      *
      * @return 返回所有摄像头信息
      */
-    @RequestMapping("/getAllCamera")
+    @GetMapping("/getAllCamera")
     @ResponseBody
     public List<Camera> getAllCamera() {
-        List<Camera> cameras = managerService.getAllCamera();
-        return cameras;
+        return managerService.getAllCamera();
     }
 
     /**
@@ -223,12 +220,11 @@ public class ManagerController {
      *
      * @return 返回所有摄像头上传图片
      */
-    @RequestMapping("/getAllCameraImage")
+    @GetMapping("/getAllCameraImage")
     @ResponseBody
     public List<Image> getAllCameraImage() {
         String source = "摄像头";
-        List<Image> cameraImages = imageSevice.getAllSourceImage(source);
-        return cameraImages;
+        return imageSevice.getAllSourceImage(source);
     }
 
     /**
@@ -236,12 +232,11 @@ public class ManagerController {
      *
      * @return 返回所有用户上传图片
      */
-    @RequestMapping("/getAllUserImage")
+    @GetMapping("/getAllUserImage")
     @ResponseBody
     public List<Image> getAllUserImage() {
-        String source = "用户";
-        List<Image> userImages = imageSevice.getAllSourceImage(source);
-        return userImages;
+        // 参数为查询条件source
+        return imageSevice.getAllSourceImage("用户");
     }
 
 
@@ -250,11 +245,10 @@ public class ManagerController {
      *
      * @return 返回查询到的所有消息
      */
-    @RequestMapping("/getDangerMessage")
+    @GetMapping("/getDangerMessage")
     @ResponseBody
     public List<Message> getDangerMessage() {
-        List<Message> dangerMessage = managerService.getDangerMessage();
-        return dangerMessage;
+        return managerService.getDangerMessage();
     }
 
     /**
@@ -262,11 +256,10 @@ public class ManagerController {
      *
      * @return 返回查询到的所有消息
      */
-    @RequestMapping("/getAllMessage")
+    @GetMapping("/getAllMessage")
     @ResponseBody
     public List<Message> getAllMessage() {
-        List<Message> allMessage = managerService.getAllMessage();
-        return allMessage;
+        return managerService.getAllMessage();
     }
 
     /**
@@ -274,11 +267,10 @@ public class ManagerController {
      *
      * @return 返回所有用户信息
      */
-    @RequestMapping("/getAllUser")
+    @GetMapping("/getAllUser")
     @ResponseBody
     public List<User> getAllUser() {
-        List<User> allUser = userService.getAllUser();
-        return allUser;
+        return userService.getAllUser();
     }
 
     /*
@@ -290,8 +282,9 @@ public class ManagerController {
      *
      * @return 成功跳转至查看所有摄像头页面，失败依旧在本页面
      */
-    @RequestMapping("/uploadCamera")
+    @PostMapping("/uploadCamera")
     public String uploadCamera(String cameraName, Integer province, Integer city, Integer district) {
+
         // 封装camera类
         Camera camera = new Camera();
         camera.setCameraName(cameraName);
@@ -300,10 +293,11 @@ public class ManagerController {
         Position positionByAllInfo = positionService.getPositionByAllInfo(province, city, district);
         Integer positionId;
         if (positionByAllInfo != null) {
+
             // 查询到数据库有对应城市
             positionId = positionByAllInfo.getPositionId();
-            camera.setPositionId(positionId);
         } else {
+
             // 未查到对应城市数据，插入该城市并返回positionId
             Position position = new Position();
             position.setProvinceId(province);
@@ -311,13 +305,16 @@ public class ManagerController {
             position.setDistrictId(district);
             positionService.uploadPosition(position);
             Position positionByAllInfoAfterInsert = positionService.getPositionByAllInfo(province, city, district);
+
             // 查询到数据库有对应城市
             positionId = positionByAllInfoAfterInsert.getPositionId();
-            camera.setPositionId(positionId);
         }
+        camera.setPositionId(positionId);
+
         // 查询输入坐标数据库是否存在
         String latitude = null;
         String longitude = null;
+
         // 读取选择的省市县信息
         Position positionByPositionId = positionService.getOtherInfoByPositionId(positionId);
         Province provinceBack = positionByPositionId.getProvince();
@@ -326,17 +323,19 @@ public class ManagerController {
         String cityName = cityBack.getCity();
         District districtBack = positionByPositionId.getDistrict();
         String districtName = districtBack.getDistrict();
+
         // 通过百度地图api搜索该地的坐标位置
         String coordinateApi = CityUtil.httpUrlConnectionPost(provinceName + cityName + districtName + cameraName);
         coordinateApi = coordinateApi.substring(27);
         coordinateApi = coordinateApi.substring(0, coordinateApi.length() - 1);
         JSONObject json = JSONObject.parseObject(coordinateApi);
+
         // 搜索到管理员输入的街道信息
         if (json.get("status").toString().equals("0")) {
             latitude = json.getJSONObject("result").getJSONObject("location").getString("lng");
             longitude = json.getJSONObject("result").getJSONObject("location").getString("lat");
         } else {
-            System.out.println("未找到相匹配的经纬度！");
+            log.info("未找到相匹配的经纬度！");
             // 没有搜索到管理员输入的街道信息，填入省市县坐标
             coordinateApi = CityUtil.httpUrlConnectionPost(provinceName + cityName + districtName);
             coordinateApi = coordinateApi.substring(27);
@@ -346,7 +345,7 @@ public class ManagerController {
                 latitude = json.getJSONObject("result").getJSONObject("location").getString("lng");
                 longitude = json.getJSONObject("result").getJSONObject("location").getString("lat");
             } else {
-                System.out.println("程序错误!");
+                log.info("程序错误!");
             }
         }
 
@@ -386,9 +385,9 @@ public class ManagerController {
      *
      * @return 成功跳转至查看所有信息页面，失败依旧在本页面
      */
-    @RequestMapping("/uploadMessage")
+    @PostMapping("/uploadMessage")
     public String uploadMessage(String messageName, String messageDescription, String result, String latitude,
-                                String longitude, Integer province, Integer city, Integer district, MultipartFile file) {
+                                String longitude, Integer province, Integer city, Integer district) {
         // 封装message类
         Message message = new Message();
         message.setMessageName(messageName);
@@ -451,11 +450,10 @@ public class ManagerController {
      * @param email    前端传进的email
      * @param response http response
      */
-    @RequestMapping("/checkEmail")
+    @PostMapping("/checkEmail")
     @ResponseBody
     public void checkEmail(@RequestParam("email") String email, HttpServletResponse
             response) {
-        System.out.println("email");
         PrintWriter out = null;
         try {
             out = response.getWriter();
@@ -479,11 +477,10 @@ public class ManagerController {
      * @param managerName 前端传进的管理员名
      * @param response    http response
      */
-    @RequestMapping("/checkManagerName")
+    @PostMapping("/checkManagerName")
     @ResponseBody
     public void checkManagerName(@RequestParam("managerName") String managerName, HttpServletResponse
             response) {
-        System.out.println("managerName");
         PrintWriter out = null;
         try {
             out = response.getWriter();
@@ -507,7 +504,7 @@ public class ManagerController {
      * @param file    头像信息
      * @return 成功跳转至管理员登录页面，失败依旧在本页面
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public String register(Manager manager, MultipartFile file, Map<String, Object> map) {
         // 用户密码MD5加密
         String password = manager.getPassword();
@@ -538,7 +535,7 @@ public class ManagerController {
      * @param request http request
      * @return 返回主页面
      */
-    @RequestMapping("/quitManager")
+    @GetMapping("/quitManager")
     public String quitUser(HttpServletRequest request) {
         // 获取当前session
         HttpSession session = request.getSession();
@@ -554,7 +551,7 @@ public class ManagerController {
      * @param password    密码
      * @return 返回loginUser，若不为空则登录成功
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(String managerName, String password, HttpServletRequest request) {
         // 用户密码MD5加密匹配
         password = Md5Util.code(password);
@@ -573,57 +570,57 @@ public class ManagerController {
     页面跳转
      */
 
-    @RequestMapping("/toPosition")
+    @GetMapping("/toPosition")
     public String toPosition() {
         return "manager/position";
     }
 
-    @RequestMapping("/toCamera")
+    @GetMapping("/toCamera")
     public String toCamera() {
         return "manager/camera";
     }
 
-    @RequestMapping("/toUploadCamera")
+    @GetMapping("/toUploadCamera")
     public String toUploadCamera() {
         return "manager/uploadCamera";
     }
 
-    @RequestMapping("/toUserImage")
+    @GetMapping("/toUserImage")
     public String toUserImage() {
         return "manager/userImage";
     }
 
-    @RequestMapping("/toCameraImage")
+    @GetMapping("/toCameraImage")
     public String toCameraImage() {
         return "manager/cameraImage";
     }
 
-    @RequestMapping("/toUploadMessage")
+    @GetMapping("/toUploadMessage")
     public String toUploadMessage() {
         return "manager/uploadMessage";
     }
 
-    @RequestMapping("/toMessage")
+    @GetMapping("/toMessage")
     public String toMessage() {
         return "manager/message";
     }
 
-    @RequestMapping("/toUserList")
+    @GetMapping("/toUserList")
     public String toUserList() {
         return "manager/userList";
     }
 
-    @RequestMapping("/toIndex")
+    @GetMapping("/toIndex")
     public String toIndex() {
         return "manager/index";
     }
 
-    @RequestMapping("/toLogin")
+    @GetMapping("/toLogin")
     public String toLogin() {
         return "manager/login";
     }
 
-    @RequestMapping("/toRegister")
+    @GetMapping("/toRegister")
     public String toRegister() {
         return "manager/register";
     }

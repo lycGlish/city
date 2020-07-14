@@ -1,7 +1,14 @@
 package com.nit.city.bean;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Camera implements Serializable {
     private Integer cameraId;
 
@@ -20,76 +27,4 @@ public class Camera implements Serializable {
     private City city;
 
     private District district;
-
-    public Province getProvince() {
-        return province;
-    }
-
-    public void setProvince(Province province) {
-        this.province = province;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public District getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(District district) {
-        this.district = district;
-    }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public Integer getCameraId() {
-        return cameraId;
-    }
-
-    public void setCameraId(Integer cameraId) {
-        this.cameraId = cameraId;
-    }
-
-    public String getCameraName() {
-        return cameraName;
-    }
-
-    public void setCameraName(String cameraName) {
-        this.cameraName = cameraName == null ? null : cameraName.trim();
-    }
-
-    public Integer getCoordinateId() {
-        return coordinateId;
-    }
-
-    public void setCoordinateId(Integer coordinateId) {
-        this.coordinateId = coordinateId;
-    }
-
-    public Integer getPositionId() {
-        return positionId;
-    }
-
-    public void setPositionId(Integer positionId) {
-        this.positionId = positionId;
-    }
 }
