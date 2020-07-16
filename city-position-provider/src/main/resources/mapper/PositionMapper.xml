@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.position.dao.PositionMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.Position">
+        <id column="position_id" jdbcType="INTEGER" property="positionId" />
+        <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+        <result column="city_id" jdbcType="INTEGER" property="cityId" />
+        <result column="district_id" jdbcType="INTEGER" property="districtId" />
+        <collection property="province" ofType="com.lyc.city.bean.Province">
+            <id column="province_id" property="provinceId"/>
+            <result column="province" jdbcType="VARCHAR" property="province"/>
+        </collection>
+        <collection property="city" ofType="com.lyc.city.bean.City">
+            <id column="city_id" property="cityId"/>
+            <result column="city" jdbcType="VARCHAR" property="city"/>
+            <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+        </collection>
+        <collection property="district" ofType="com.lyc.city.bean.District">
+            <id column="district_id" property="districtId"/>
+            <result column="district" jdbcType="VARCHAR" property="district"/>
+            <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+    position_id, province_id, city_id, district_id
+    </sql>
+    <select id="selectByAllInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from city_position
+        where province_id = #{provinceId}
+        and city_id = #{cityId}
+        and district_id = #{districtId}
+    </select>
+    <insert id="insertPosition" parameterType="com.lyc.city.bean.Position">
+    insert into city_position (position_id, province_id, city_id,
+      district_id)
+    values (#{positionId,jdbcType=INTEGER}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER},
+      #{districtId,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectOtherInfoByPositionId" resultMap="BaseResultMap">
+        select
+            city_position.*,city_province.*,city_city.*,city_district.*
+        from city_position
+        inner join city_province
+            on city_position.province_id = city_province.province_id
+        inner join city_city
+            on city_position.city_id = city_city.city_id
+        inner join city_district
+            on city_position.district_id = city_district.district_id
+        where city_position.position_id = #{positionId}
+    </select>
+
+    <select id="selectAllPosition" resultMap="BaseResultMap">
+        select city_position.*,city_province.*,city_city.*,city_district.*
+        from city_position
+        inner join city_province
+            on city_position.province_id = city_province.province_id
+        inner join city_city
+            on city_position.city_id = city_city.city_id
+        inner join city_district
+            on city_position.district_id = city_district.district_id
+    </select>
+
+    <delete id="deletePositionByPositionId" parameterType="java.lang.Integer">
+        delete from city_position
+        where position_id = #{positionId,jdbcType=INTEGER}
+    </delete>
+</mapper>

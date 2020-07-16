@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.user.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="flag" jdbcType="CHAR" property="flag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, user_name, password, avatar, email, flag, create_time
+    </sql>
+
+    <select id="selectAllUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from city_user
+    </select>
+
+    <delete id="deleteUserByUserId" parameterType="java.lang.Integer">
+        delete from city_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+</mapper>

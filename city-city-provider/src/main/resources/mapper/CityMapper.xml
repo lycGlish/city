@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.city.dao.CityMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.City">
+        <id column="city_id" jdbcType="INTEGER" property="cityId" />
+        <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+        <result column="city" jdbcType="VARCHAR" property="city" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        city_id, province_id, city
+    </sql>
+    <select id="selectDistrictByCity" parameterType="java.lang.Integer" resultType="com.lyc.city.bean.District">
+    select
+    city_district.district_id,city_district.district
+    from city_district
+    where city_id = #{cityId}
+    </select>
+</mapper>

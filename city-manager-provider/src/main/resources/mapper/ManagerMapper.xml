@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.manager.dao.ManagerMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.Manager">
+        <id column="manager_id" jdbcType="INTEGER" property="managerId" />
+        <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        manager_id, manager_name, password, avatar, email, create_time
+    </sql>
+
+    <select id="selectByManagerNameAndPassword" resultType="com.lyc.city.bean.Manager">
+        select
+        <include refid="Base_Column_List"/>
+        from city_manager
+        where manager_name = #{managerName} and password = #{password}
+    </select>
+</mapper>

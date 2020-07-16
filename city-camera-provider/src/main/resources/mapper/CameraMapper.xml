@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.camera.dao.CameraMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.Camera">
+        <id column="camera_id" jdbcType="INTEGER" property="cameraId" />
+        <result column="camera_name" jdbcType="VARCHAR" property="cameraName" />
+        <result column="coordinate_id" jdbcType="INTEGER" property="coordinateId" />
+        <result column="position_id" jdbcType="INTEGER" property="positionId" />
+        <collection property="province" ofType="com.lyc.city.bean.Province">
+            <id column="province_id" property="provinceId"/>
+            <result column="province" jdbcType="VARCHAR" property="province"/>
+        </collection>
+        <collection property="city" ofType="com.lyc.city.bean.City">
+            <id column="city_id" property="cityId"/>
+            <result column="city" jdbcType="VARCHAR" property="city"/>
+            <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+        </collection>
+        <collection property="district" ofType="com.lyc.city.bean.District">
+            <id column="district_id" property="districtId"/>
+            <result column="district" jdbcType="VARCHAR" property="district"/>
+            <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        </collection>
+        <collection property="position" ofType="com.lyc.city.bean.Position">
+            <id column="position_id" property="positionId"/>
+            <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+            <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+            <result column="district_id" jdbcType="INTEGER" property="districtId"/>
+        </collection>
+        <collection property="coordinate" ofType="com.lyc.city.bean.Coordinate">
+            <id column="coordinate_id" property="coordinateId"/>
+            <result column="latitude" jdbcType="VARCHAR" property="latitude"/>
+            <result column="longitude" jdbcType="VARCHAR" property="longitude"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        camera_id, camera_name, coordinate_id, position_id
+    </sql>
+
+    <select id="selectAllCamera" resultMap="BaseResultMap">
+        select
+            city_camera.*,city_coordinate.*,city_position.*,city_province.province,city_city.city,city_district.district
+        from city_camera
+        inner join city_coordinate
+            on (city_camera.coordinate_id = city_coordinate.coordinate_id)
+        inner join city_position
+            on (city_camera.position_id = city_position.position_id)
+        inner join city_province
+            on (city_position.province_id = city_province.province_id)
+        inner join city_city
+            on (city_position.city_id = city_city.city_id)
+        inner join city_district
+            on (city_position.district_id = city_district.district_id)
+    </select>
+
+    <delete id="deleteCameraByCameraId" parameterType="java.lang.Integer">
+        delete from city_camera
+        where camera_id = #{cameraId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insertCamera" parameterType="com.lyc.city.bean.Camera">
+        insert into city_camera (camera_id, camera_name, coordinate_id, position_id)
+        values (#{cameraId,jdbcType=INTEGER}, #{cameraName,jdbcType=VARCHAR}, #{coordinateId,jdbcType=INTEGER},
+            #{positionId,jdbcType=INTEGER})
+    </insert>
+
+    <update id="updateCameraNameByCameraId" parameterType="com.lyc.city.bean.Camera">
+        update city_camera
+        set camera_name = #{cameraName,jdbcType=VARCHAR},
+        where camera_id = #{cameraId,jdbcType=INTEGER}
+    </update>
+</mapper>

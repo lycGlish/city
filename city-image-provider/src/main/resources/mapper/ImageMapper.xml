@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.image.dao.ImageMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.Image">
+        <id column="image_id" jdbcType="INTEGER" property="imageId"/>
+        <result column="image_name" jdbcType="VARCHAR" property="imageName"/>
+        <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="image_description" jdbcType="VARCHAR" property="imageDescription"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="position_id" jdbcType="INTEGER" property="positionId"/>
+        <result column="result_id" jdbcType="INTEGER" property="resultId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="coordinate_id" jdbcType="INTEGER" property="coordinateId"/>
+        <result column="image_time" jdbcType="TIMESTAMP" property="imageTime"/>
+        <collection property="position" ofType="com.lyc.city.bean.Position">
+            <id column="position_id" property="positionId"/>
+            <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+            <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+            <result column="district_id" jdbcType="INTEGER" property="districtId"/>
+        </collection>
+        <collection property="result" ofType="com.lyc.city.bean.Result">
+            <id column="result_id" property="resultId"/>
+            <result column="result_name" jdbcType="VARCHAR" property="resultName"/>
+        </collection>
+        <collection property="user" ofType="com.lyc.city.bean.User">
+            <id column="user_id" property="userId"/>
+            <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        </collection>
+        <collection property="coordinate" ofType="com.lyc.city.bean.Coordinate">
+            <id column="coordinate_id" property="coordinateId"/>
+            <result column="latitude" jdbcType="VARCHAR" property="latitude"/>
+            <result column="longitude" jdbcType="VARCHAR" property="longitude"/>
+        </collection>
+        <collection property="province" ofType="com.lyc.city.bean.Province">
+            <id column="province_id" property="provinceId"/>
+            <result column="province" jdbcType="VARCHAR" property="province"/>
+        </collection>
+        <collection property="city" ofType="com.lyc.city.bean.City">
+            <id column="city_id" property="cityId"/>
+            <result column="city" jdbcType="VARCHAR" property="city"/>
+            <result column="province_id" jdbcType="INTEGER" property="provinceId"/>
+        </collection>
+        <collection property="district" ofType="com.lyc.city.bean.District">
+            <id column="district_id" property="districtId"/>
+            <result column="district" jdbcType="VARCHAR" property="district"/>
+            <result column="city_id" jdbcType="INTEGER" property="cityId"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        image_id, image_name, image_url, status, image_description, source, position_id,
+        result_id, user_id, coordinate_id, image_time
+    </sql>
+
+    <insert id="insertImage" parameterType="com.lyc.city.bean.Image">
+        insert into city_image (image_id, image_name, image_url,
+          status, image_description, source,
+          position_id, result_id, user_id,
+          coordinate_id, image_time)
+        values (#{imageId,jdbcType=INTEGER}, #{imageName,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR},
+          #{status,jdbcType=VARCHAR}, #{imageDescription,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR},
+          #{positionId,jdbcType=INTEGER}, #{resultId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+          #{coordinateId,jdbcType=INTEGER}, #{imageTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="selectAllImage" resultMap="BaseResultMap">
+        select
+            city_image.*,city_position.*,city_result.result_name,city_user.user_name,city_coordinate.latitude,
+            city_coordinate.longitude,city_province.province,city_city.city,city_district.district
+        from city_image
+        inner join city_result
+            on (city_image.result_id = city_result.result_id)
+        inner join city_user
+            on (city_image.user_id = city_user.user_id)
+        inner join city_coordinate
+            on (city_image.coordinate_id = city_coordinate.coordinate_id)
+        inner join city_position
+            on (city_image.position_id = city_position.position_id)
+        inner join city_province
+            on (city_position.province_id = city_province.province_id)
+        inner join city_city
+            on (city_position.city_id = city_city.city_id)
+        inner join city_district
+            on (city_position.district_id = city_district.district_id)
+    </select>
+
+    <select id="selectAllImageBySource" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+            city_image.*,city_position.*,city_result.result_name,city_user.user_name,city_coordinate.latitude,
+            city_coordinate.longitude,city_province.province,city_city.city,city_district.district
+        from city_image
+        inner join city_result
+            on (city_image.result_id = city_result.result_id)
+        inner join city_user
+            on (city_image.user_id = city_user.user_id)
+        inner join city_coordinate
+            on (city_image.coordinate_id = city_coordinate.coordinate_id)
+        inner join city_position
+            on (city_image.position_id = city_position.position_id)
+        inner join city_province
+            on (city_position.province_id = city_province.province_id)
+        inner join city_city
+            on (city_position.city_id = city_city.city_id)
+        inner join city_district
+            on (city_position.district_id = city_district.district_id)
+        where city_image.source = #{source}
+    </select>
+
+    <delete id="deleteImageByImageId" parameterType="java.lang.Integer">
+        delete from city_image
+        where image_id = #{imageId,jdbcType=INTEGER}
+    </delete>
+
+    <update id="updateImageResultByImageId" parameterType="com.lyc.city.bean.Image">
+        update city_image
+        set image_description = #{imageDescription,jdbcType=VARCHAR},
+          result_id = #{resultId,jdbcType=INTEGER},
+          image_time = #{imageTime,jdbcType=TIMESTAMP}
+        where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+</mapper>

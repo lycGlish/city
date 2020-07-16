@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.coordinate.dao.CoordinateMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.Coordinate">
+        <id column="coordinate_id" jdbcType="INTEGER" property="coordinateId"/>
+        <result column="longitude" jdbcType="DOUBLE" property="longitude"/>
+        <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    coordinate_id, latitude, longitude
+    </sql>
+    <insert id="insertCoordinateWithoutId" parameterType="com.lyc.city.bean.Coordinate">
+    insert into city_coordinate (latitude, longitude)
+    values (#{latitude}, #{longitude})
+    </insert>
+
+    <select id="selectByImageLatitudeAndImageLongitude" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from city_coordinate
+        where longitude = #{longitude} and latitude = #{latitude}
+    </select>
+</mapper>

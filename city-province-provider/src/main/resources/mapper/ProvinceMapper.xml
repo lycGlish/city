@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyc.city.province.dao.ProvinceMapper">
+    <resultMap id="BaseResultMap" type="com.lyc.city.bean.Province">
+        <id column="province_id" jdbcType="INTEGER" property="provinceId" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    province_id, province
+    </sql>
+    <select id="selectCityByProvince" parameterType="java.lang.Integer" resultType="com.lyc.city.bean.City">
+    select
+    city_city.city_id,city_city.city
+    from city_city
+    where province_id = #{provinceId}
+    </select>
+    <select id="selectAllProvince" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from city_province
+    </select>
+</mapper>

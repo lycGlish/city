@@ -1,0 +1,25 @@
+server:
+  port: 6021
+
+spring:
+  application:
+    name: city-user-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.26.65.52:8848
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: utf-8
+    cache: false
+  mvc:
+    static-path-pattern: /static/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
