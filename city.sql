@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 17/05/2020 21:24:04
+ Date: 16/07/2020 16:45:51
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `city_camera`  (
   PRIMARY KEY (`camera_id`) USING BTREE,
   INDEX `camera_coordinate_id`(`coordinate_id`) USING BTREE,
   CONSTRAINT `camera_coordinate_id` FOREIGN KEY (`coordinate_id`) REFERENCES `city_coordinate` (`coordinate_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_camera
@@ -44,6 +44,10 @@ INSERT INTO `city_camera` VALUES (12, '黄龙路', 54, 4);
 INSERT INTO `city_camera` VALUES (13, '风情大道', 55, 12);
 INSERT INTO `city_camera` VALUES (14, '解放南路', 56, 13);
 INSERT INTO `city_camera` VALUES (15, '南营房胡同', 57, 10);
+INSERT INTO `city_camera` VALUES (24, '昌东镇天祥大道289号', 61, 3);
+INSERT INTO `city_camera` VALUES (26, '亿升广场', 73, 1);
+INSERT INTO `city_camera` VALUES (27, '江西师范大学', 74, 3);
+INSERT INTO `city_camera` VALUES (28, '章江路', 75, 21);
 
 -- ----------------------------
 -- Table structure for city_city
@@ -109,7 +113,7 @@ CREATE TABLE `city_coordinate`  (
   `longitude` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`coordinate_id`) USING BTREE,
   UNIQUE INDEX `ll`(`latitude`, `longitude`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 78 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_coordinate
@@ -118,29 +122,44 @@ INSERT INTO `city_coordinate` VALUES (3, '110', '15');
 INSERT INTO `city_coordinate` VALUES (14, '110.35', '12.545');
 INSERT INTO `city_coordinate` VALUES (2, '110.35', '40.00');
 INSERT INTO `city_coordinate` VALUES (4, '111.25', '32.01');
+INSERT INTO `city_coordinate` VALUES (67, '113.96854067422115', '27.133462711027769');
 INSERT INTO `city_coordinate` VALUES (6, '114.12', '24.12');
+INSERT INTO `city_coordinate` VALUES (64, '114.77153821508895', '25.667052930560435');
+INSERT INTO `city_coordinate` VALUES (59, '114.91757843671435', '26.79608230054638');
 INSERT INTO `city_coordinate` VALUES (12, '115.45', '12.45');
+INSERT INTO `city_coordinate` VALUES (76, '115.85265450231498', '28.675728131364914');
+INSERT INTO `city_coordinate` VALUES (77, '115.88126229081374', '28.65702584615772');
+INSERT INTO `city_coordinate` VALUES (75, '115.88892251199667', '28.684714350791329');
 INSERT INTO `city_coordinate` VALUES (25, '115.93', '28.55');
+INSERT INTO `city_coordinate` VALUES (60, '115.95046017276752', '28.551604186108276');
+INSERT INTO `city_coordinate` VALUES (61, '116.03069886004576', '28.69357809366207');
+INSERT INTO `city_coordinate` VALUES (74, '116.03320039834773', '28.68740374598857');
 INSERT INTO `city_coordinate` VALUES (48, '116.03749241224243', '28.695855252419574');
 INSERT INTO `city_coordinate` VALUES (19, '116.30', '39.95');
 INSERT INTO `city_coordinate` VALUES (26, '116.30842', '40.05703');
 INSERT INTO `city_coordinate` VALUES (23, '116.37', '39.92');
 INSERT INTO `city_coordinate` VALUES (36, '116.37251', '39.918125');
+INSERT INTO `city_coordinate` VALUES (65, '116.38083701052999', '39.918878346302147');
 INSERT INTO `city_coordinate` VALUES (1, '116.395645', '39.929986');
 INSERT INTO `city_coordinate` VALUES (22, '116.42', '39.93');
 INSERT INTO `city_coordinate` VALUES (24, '116.43', '39.92');
 INSERT INTO `city_coordinate` VALUES (57, '116.4495985621645', '39.926214883319307');
+INSERT INTO `city_coordinate` VALUES (72, '116.51288495608856', '39.84746927558593');
 INSERT INTO `city_coordinate` VALUES (29, '116.706856', '28.695759');
 INSERT INTO `city_coordinate` VALUES (42, '116.70685883396503', '28.695759328061805');
+INSERT INTO `city_coordinate` VALUES (63, '117.26237340240043', '39.127393569570518');
+INSERT INTO `city_coordinate` VALUES (71, '117.91443700689409', '28.45466086134279');
 INSERT INTO `city_coordinate` VALUES (16, '117.95546388', '28.45762255');
 INSERT INTO `city_coordinate` VALUES (39, '117.95582', '28.44368');
 INSERT INTO `city_coordinate` VALUES (52, '117.9608270305334', '28.45051400151386');
 INSERT INTO `city_coordinate` VALUES (32, '117.96083', '28.450514');
 INSERT INTO `city_coordinate` VALUES (31, '117.96273', '28.465132');
+INSERT INTO `city_coordinate` VALUES (58, '117.96273210295999', '28.465131365602116');
 INSERT INTO `city_coordinate` VALUES (21, '117.96682', '28.43121');
 INSERT INTO `city_coordinate` VALUES (33, '117.97341', '28.437628');
 INSERT INTO `city_coordinate` VALUES (40, '117.97341184157127', '28.437628310999736');
 INSERT INTO `city_coordinate` VALUES (51, '117.97498953553793', '28.38273725487966');
+INSERT INTO `city_coordinate` VALUES (73, '117.97702644328112', '28.45086954382145');
 INSERT INTO `city_coordinate` VALUES (35, '117.97722', '28.452222');
 INSERT INTO `city_coordinate` VALUES (30, '117.98273', '28.449284');
 INSERT INTO `city_coordinate` VALUES (38, '117.985825', '28.455956');
@@ -150,11 +169,16 @@ INSERT INTO `city_coordinate` VALUES (50, '117.99175497058731', '28.468453882727
 INSERT INTO `city_coordinate` VALUES (41, '117.99589813525907', '28.46299894229272');
 INSERT INTO `city_coordinate` VALUES (53, '120.12112559963518', '30.326088189758388');
 INSERT INTO `city_coordinate` VALUES (17, '120.13', '30.27');
+INSERT INTO `city_coordinate` VALUES (69, '120.13119873499675', '30.19885230993087');
+INSERT INTO `city_coordinate` VALUES (70, '120.13643801205312', '30.265916325588923');
 INSERT INTO `city_coordinate` VALUES (54, '120.1433117344256', '30.27471342264234');
 INSERT INTO `city_coordinate` VALUES (18, '120.17', '30.28');
+INSERT INTO `city_coordinate` VALUES (62, '120.17557880007279', '30.248398420425884');
+INSERT INTO `city_coordinate` VALUES (68, '120.18760693119028', '30.286744052561525');
 INSERT INTO `city_coordinate` VALUES (55, '120.24272261307708', '30.091549575358525');
 INSERT INTO `city_coordinate` VALUES (56, '120.58535007161702', '29.97404885309228');
 INSERT INTO `city_coordinate` VALUES (11, '121.125', '45.12');
+INSERT INTO `city_coordinate` VALUES (66, '121.49158559252436', '31.23724715206362');
 INSERT INTO `city_coordinate` VALUES (20, '123', '123');
 INSERT INTO `city_coordinate` VALUES (8, '123.456', '15.464');
 INSERT INTO `city_coordinate` VALUES (13, '125.112', '15.464');
@@ -481,7 +505,7 @@ CREATE TABLE `city_image`  (
   CONSTRAINT `image_position_id` FOREIGN KEY (`position_id`) REFERENCES `city_position` (`position_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `image_result_id` FOREIGN KEY (`result_id`) REFERENCES `city_result` (`result_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `image_user_id` FOREIGN KEY (`user_id`) REFERENCES `city_user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_image
@@ -495,17 +519,34 @@ INSERT INTO `city_image` VALUES (26, '五三大道', 'http://120.26.65.52:80/gro
 INSERT INTO `city_image` VALUES (27, '中山路', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61FGyAOkCwAAANlagHv2k560.jpg', '2', '机器识别', '摄像头', 1, 1, 6, 30, '2020-05-08 16:13:07');
 INSERT INTO `city_image` VALUES (28, '凤凰大道', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61FPiAZZREAAAQILU4Yg4333.jpg', '2', '机器识别', '用户', 1, 1, 6, 31, '2020-05-08 16:15:53');
 INSERT INTO `city_image` VALUES (29, '万达广场', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61FdCAa2dnAAAO4Nz6r5c094.jpg', '2', '机器识别', '用户', 1, 1, 6, 32, '2020-05-08 16:19:12');
-INSERT INTO `city_image` VALUES (32, '爱尔眼科', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61HEiAMCFaAC58w2waMmk859.jpg', '2', '人工修改', '用户', 1, 2, 6, 35, '2020-05-17 20:47:43');
+INSERT INTO `city_image` VALUES (32, '爱尔眼科', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61HEiAMCFaAC58w2waMmk859.jpg', '2', '人工修改', '用户', 1, 1, 6, 35, '2020-05-30 10:36:34');
 INSERT INTO `city_image` VALUES (33, '天安门', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61HdCAOczxAAAO0GEoSZI055.jpg', '2', '机器识别', '摄像头', 9, 4, 6, 36, '2020-05-08 16:52:36');
 INSERT INTO `city_image` VALUES (34, '万力时代', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62VAqAAAwYAAAPPRqhgYE816.jpg', '2', '机器识别', '用户', 1, 3, 6, 37, '2020-05-09 14:56:17');
 INSERT INTO `city_image` VALUES (35, '万达广场', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62VDeALBvxAAAPrDTchVI681.jpg', '2', '机器识别', '用户', 1, 4, 6, 32, '2020-05-09 14:56:57');
 INSERT INTO `city_image` VALUES (36, '四中', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62VPKAa-OkAAAQBpc5G2s063.jpg', '2', '机器识别', '用户', 1, 1, 6, 38, '2020-05-09 15:00:04');
-INSERT INTO `city_image` VALUES (48, '上饶师范', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62YgaAN2hIAAAPuwEjjzk955.jpg', '2', '机器识别', '摄像头', 1, 3, 6, 40, '2020-05-09 15:57:10');
 INSERT INTO `city_image` VALUES (49, '现代城', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62Y22AW83OAAAQUPDJQoc339.jpg', '2', '机器识别', '摄像头', 1, 3, 6, 41, '2020-05-09 16:01:54');
-INSERT INTO `city_image` VALUES (51, '南昌工程学院', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6-yOuAVKNLAAAOLB0DaWI970.jpg', '2', '人工修改', '摄像头', 3, 1, 6, 48, '2020-05-17 20:50:20');
+INSERT INTO `city_image` VALUES (51, '南昌工程学院', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6-yOuAVKNLAAAOLB0DaWI970.jpg', '2', '人工修改', '摄像头', 3, 1, 6, 48, '2020-07-15 16:55:03');
 INSERT INTO `city_image` VALUES (57, '紫阳公园', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_gjKAZzYXAAAPzNwq23Q476.jpg', '2', '机器识别', '用户', 1, 3, 6, 50, '2020-05-16 14:03:35');
 INSERT INTO `city_image` VALUES (58, '上饶火车站', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_grKAU1AcAAARt8Ky9k8490.jpg', '2', '机器识别', '摄像头', 1, 3, 6, 40, '2020-05-16 14:05:41');
 INSERT INTO `city_image` VALUES (59, '三清山机场', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_hcyAOZV7AAAM-y1rSdk374.jpg', '2', '机器识别', '用户', 1, 4, 6, 51, '2020-05-16 14:18:57');
+INSERT INTO `city_image` VALUES (61, '凤凰大道', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7BQmaAYaR-AAAMgqCkA1g424.jpg', '2', '机器识别', '用户', 1, 2, 6, 58, '2020-05-17 21:55:55');
+INSERT INTO `city_image` VALUES (74, '上海黄浦区', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7KIbeAEsv5AAQaY5QMjq0345.jpg', '2', '机器识别', '用户', 18, 3, 6, 66, '2020-05-24 15:26:49');
+INSERT INTO `city_image` VALUES (103, '凤凰大道', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nkDSAbdHvAAAMUApQls0155.jpg', '2', '机器识别', '用户', 1, 1, 6, 58, '2020-06-15 23:13:58');
+INSERT INTO `city_image` VALUES (106, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nmf6AdProAAJxDax3V-I119.jpg', '2', '机器识别', '用户', 21, 4, 6, 75, '2020-06-15 23:55:44');
+INSERT INTO `city_image` VALUES (107, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nmjaAcFU0AALCWspklEk484.jpg', '2', '人工修改', '用户', 21, 4, 6, 75, '2020-06-15 23:59:14');
+INSERT INTO `city_image` VALUES (108, '丰和立交', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nmmaAQq6CAAq7FcZDqV4352.jpg', '2', '机器识别', '用户', 3, 1, 6, 76, '2020-06-15 23:57:27');
+INSERT INTO `city_image` VALUES (109, '丰和立交', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nmymAdfe6AAl6ugmmWX0174.jpg', '2', '机器识别', '用户', 3, 1, 6, 76, '2020-06-16 00:00:42');
+INSERT INTO `city_image` VALUES (110, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nm6eATx_AAAKqYAZFJFY370.jpg', '2', '人工修改', '用户', 21, 4, 6, 75, '2020-06-16 00:04:10');
+INSERT INTO `city_image` VALUES (111, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnICALFbFAALB0u0X7eM042.jpg', '2', '机器识别', '用户', 21, 1, 6, 75, '2020-06-16 00:06:26');
+INSERT INTO `city_image` VALUES (112, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnNCAACKSAALc9rxXdSY104.jpg', '2', '机器识别', '用户', 21, 3, 6, 75, '2020-06-16 00:07:45');
+INSERT INTO `city_image` VALUES (113, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnP-AXn8gAAK3luLDTJI394.jpg', '2', '机器识别', '用户', 21, 2, 6, 75, '2020-06-16 00:08:33');
+INSERT INTO `city_image` VALUES (114, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnSOAD-mdAAJx1dMaLzg700.jpg', '2', '机器识别', '用户', 21, 4, 6, 75, '2020-06-16 00:09:09');
+INSERT INTO `city_image` VALUES (115, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnWaAWnWRAAJxgR7BwgQ416.jpg', '2', '机器识别', '用户', 21, 4, 6, 75, '2020-06-16 00:10:15');
+INSERT INTO `city_image` VALUES (116, '章江路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnXaABMjjAAJxDax3V-I593.jpg', '2', '机器识别', '用户', 21, 4, 6, 75, '2020-06-16 00:10:31');
+INSERT INTO `city_image` VALUES (117, '抚生路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnZaALuKTAAKShnNhEzM400.jpg', '2', '机器识别', '用户', 22, 3, 6, 77, '2020-06-16 00:11:03');
+INSERT INTO `city_image` VALUES (118, '抚生路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnemAUJxOAAJOlrIj37I705.jpg', '2', '机器识别', '用户', 22, 3, 6, 77, '2020-06-16 00:12:27');
+INSERT INTO `city_image` VALUES (119, '抚生路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nngGAdGhZAAJw9Di7HHg544.jpg', '2', '机器识别', '用户', 22, 3, 6, 77, '2020-06-16 00:12:51');
+INSERT INTO `city_image` VALUES (120, '抚生路', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nni-AfjDUAAM7BZEBK0M404.jpg', '2', '机器识别', '用户', 22, 4, 6, 77, '2020-06-16 00:13:36');
 
 -- ----------------------------
 -- Table structure for city_manager
@@ -543,12 +584,12 @@ CREATE TABLE `city_message`  (
   `creator` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `image_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_message
 -- ----------------------------
-INSERT INTO `city_message` VALUES (16, '系统上传', '人工修改', 22, 8, '2020-05-17 20:00:39', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwaCAdIe9AAARRVDCAF4056.jpg');
+INSERT INTO `city_message` VALUES (16, '系统上传', '人工修改', 22, 8, '2020-05-30 10:36:13', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwaCAdIe9AAARRVDCAF4056.jpg');
 INSERT INTO `city_message` VALUES (17, '系统上传', '系统识别', 23, 9, '2020-05-07 16:08:16', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwe-AECH8AAAQPUEp19k202.jpg');
 INSERT INTO `city_message` VALUES (18, '系统上传', '系统识别', 24, 10, '2020-05-07 16:09:30', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwjmAcbKzAAAQqeCx1R0275.jpg');
 INSERT INTO `city_message` VALUES (19, '系统上传', '系统识别', 36, 9, '2020-05-08 16:52:36', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61HdCAOczxAAAO0GEoSZI055.jpg');
@@ -558,7 +599,18 @@ INSERT INTO `city_message` VALUES (32, '系统上传', '系统识别', 40, 1, '2
 INSERT INTO `city_message` VALUES (33, '系统上传', '系统识别', 41, 1, '2020-05-09 16:01:54', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62Y22AW83OAAAQUPDJQoc339.jpg');
 INSERT INTO `city_message` VALUES (35, '系统上传', '系统上传', 50, 1, '2020-05-16 14:03:35', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_gjKAZzYXAAAPzNwq23Q476.jpg');
 INSERT INTO `city_message` VALUES (36, '系统上传', '系统上传', 40, 1, '2020-05-16 14:05:41', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_grKAU1AcAAARt8Ky9k8490.jpg');
-INSERT INTO `city_message` VALUES (37, '系统上传', '系统识别', 51, 1, '2020-05-16 14:18:57', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_hcyAOZV7AAAM-y1rSdk374.jpg');
+INSERT INTO `city_message` VALUES (39, '系统上传', '系统识别', 58, 1, '2020-05-17 21:55:55', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7BQmaAYaR-AAAMgqCkA1g424.jpg');
+INSERT INTO `city_message` VALUES (40, '系统上传', '系统识别', 63, 16, '2020-05-24 14:38:48', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7KFnaADmUZAAQaY5QMjq0405.jpg');
+INSERT INTO `city_message` VALUES (46, '系统上传', '系统识别', 75, 21, '2020-06-15 23:55:44', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nmf6AdProAAJxDax3V-I119.jpg');
+INSERT INTO `city_message` VALUES (47, '系统上传', '系统识别', 75, 21, '2020-06-16 00:07:45', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnNCAACKSAALc9rxXdSY104.jpg');
+INSERT INTO `city_message` VALUES (48, '系统上传', '系统识别', 75, 21, '2020-06-16 00:08:33', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnP-AXn8gAAK3luLDTJI394.jpg');
+INSERT INTO `city_message` VALUES (49, '系统上传', '系统识别', 75, 21, '2020-06-16 00:09:09', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnSOAD-mdAAJx1dMaLzg700.jpg');
+INSERT INTO `city_message` VALUES (50, '系统上传', '系统识别', 75, 21, '2020-06-16 00:10:15', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnWaAWnWRAAJxgR7BwgQ416.jpg');
+INSERT INTO `city_message` VALUES (51, '系统上传', '系统识别', 75, 21, '2020-06-16 00:10:31', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnXaABMjjAAJxDax3V-I593.jpg');
+INSERT INTO `city_message` VALUES (52, '系统上传', '系统识别', 77, 22, '2020-06-16 00:11:03', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnZaALuKTAAKShnNhEzM400.jpg');
+INSERT INTO `city_message` VALUES (53, '系统上传', '系统识别', 77, 22, '2020-06-16 00:12:27', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnemAUJxOAAJOlrIj37I705.jpg');
+INSERT INTO `city_message` VALUES (54, '系统上传', '系统识别', 77, 22, '2020-06-16 00:12:51', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nngGAdGhZAAJw9Di7HHg544.jpg');
+INSERT INTO `city_message` VALUES (55, '系统上传', '系统识别', 77, 22, '2020-06-16 00:13:36', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nni-AfjDUAAM7BZEBK0M404.jpg');
 
 -- ----------------------------
 -- Table structure for city_position
@@ -570,7 +622,7 @@ CREATE TABLE `city_position`  (
   `city_id` int(11) NOT NULL,
   `district_id` int(11) NOT NULL,
   PRIMARY KEY (`position_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_position
@@ -586,6 +638,15 @@ INSERT INTO `city_position` VALUES (9, 3, 23, 192);
 INSERT INTO `city_position` VALUES (10, 3, 23, 193);
 INSERT INTO `city_position` VALUES (11, 2, 3, 108);
 INSERT INTO `city_position` VALUES (12, 2, 3, 111);
+INSERT INTO `city_position` VALUES (14, 1, 8, 65);
+INSERT INTO `city_position` VALUES (15, 2, 3, 5);
+INSERT INTO `city_position` VALUES (16, 4, 24, 208);
+INSERT INTO `city_position` VALUES (17, 1, 6, 20);
+INSERT INTO `city_position` VALUES (18, 5, 25, 223);
+INSERT INTO `city_position` VALUES (19, 1, 10, 85);
+INSERT INTO `city_position` VALUES (20, 1, 1, 37);
+INSERT INTO `city_position` VALUES (21, 1, 2, 12);
+INSERT INTO `city_position` VALUES (22, 1, 2, 11);
 
 -- ----------------------------
 -- Table structure for city_province
@@ -674,9 +735,9 @@ CREATE TABLE `city_user`  (
 -- ----------------------------
 -- Records of city_user
 -- ----------------------------
-INSERT INTO `city_user` VALUES (6, '匿名', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6RZLmALwgcAAIvYDWV9Lg854.jpg', '344962079@qq.com', '1', '2020-04-11 14:33:29');
-INSERT INTO `city_user` VALUES (7, '王五', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6dLy6AfTEHAAamktmMelo212.jpg', '1234567@qq.com', '1', '2020-04-20 13:12:15');
-INSERT INTO `city_user` VALUES (9, '李四', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6mlJyAZwiiAAamktmMelo463.jpg', '51411651@qq.com', '1', '2020-04-27 16:15:24');
+INSERT INTO `city_user` VALUES (6, '系统用户', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6RZLmALwgcAAIvYDWV9Lg854.jpg', '344962079@qq.com', '1', '2020-04-11 14:33:29');
+INSERT INTO `city_user` VALUES (7, '叶健安', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6dLy6AfTEHAAamktmMelo212.jpg', '1234567@qq.com', '1', '2020-04-20 13:12:15');
+INSERT INTO `city_user` VALUES (9, '朱经莹', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6mlJyAZwiiAAamktmMelo463.jpg', '51411651@qq.com', '1', '2020-04-27 16:15:24');
 INSERT INTO `city_user` VALUES (10, '林宇聪', '92d10e871a74f865b69ea2f70eb90145', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6w-eGAepEBABVdPsx3fI0879.png', '708901735@qq.com', '1', '2020-05-05 13:30:11');
 
 SET FOREIGN_KEY_CHECKS = 1;
