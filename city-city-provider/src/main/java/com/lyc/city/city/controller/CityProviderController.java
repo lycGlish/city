@@ -23,9 +23,14 @@ public class CityProviderController {
     @Resource
     private CityService cityService;
 
-    @RequestMapping("/getDistrictByCity")
+    /**
+     * 获取所有区/县信息
+     * @param cityId 城市id
+     * @return 所有区/县信息
+     */
+    @RequestMapping("/getAllDistrictByCity")
     @ResponseBody
-    public List<District> getDistrictByCity(Integer cityId){
-        return cityService.getDistrictByCity(cityId);
+    public List<District> getAllDistrictByCity(Integer cityId){
+        return cityService.getAllDistrictByCity(cityId);
     }
 }

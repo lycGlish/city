@@ -18,6 +18,7 @@ import java.util.List;
  * @author lyc
  * @date 2020/7/15 15:28
  */
+
 @Controller
 @Slf4j
 @CrossOrigin
@@ -29,6 +30,11 @@ public class CameraProviderController {
     @Resource
     private CameraService cameraService;
 
+    /**
+     * 修改摄像头具体位置
+     * @param cameraName 摄像头具体位置
+     * @param cameraId 摄像头id
+     */
     @PostMapping("/updateCameraNameByCameraId")
     @ResponseBody
     public void updateCameraNameByCameraId(@RequestParam("modal_cameraName") String cameraName,
@@ -44,6 +50,10 @@ public class CameraProviderController {
         }
     }
 
+    /**
+     * 修改摄像头
+     * @param cameraId 摄像头id
+     */
     @GetMapping("/deleteCameraByCameraId")
     @ResponseBody
     public void deleteCameraByCameraId(@RequestParam("cameraId") Integer cameraId) {
@@ -55,12 +65,25 @@ public class CameraProviderController {
         }
     }
 
+    /**
+     * 获取所有摄像头信息
+     * @return 所有摄像头信息
+     */
     @GetMapping("/getAllCamera")
     @ResponseBody
     public List<Camera> getAllCamera() {
         return cameraService.getAllCamera();
     }
 
+    /**
+     * 上传摄像头信息
+     * @param cameraName 摄像头具体位置
+     * @param province 省份
+     * @param city 城市
+     * @param district 区/县
+     * @param request request对象
+     * @return 查看摄像头信息页面
+     */
     @PostMapping("/uploadCamera")
     public String uploadCamera(String cameraName, Integer province, Integer city, Integer district, HttpServletRequest request) {
         HttpSession session = request.getSession(true);

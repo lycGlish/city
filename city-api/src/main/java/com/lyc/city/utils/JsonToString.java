@@ -1,7 +1,9 @@
 package com.lyc.city.utils;
 
 /**
+ * json转String工具
  * @author lyc
+ * @date 2020/7/9 16:41
  */
 public class JsonToString {
     public static String getJsonToString(String jsonUrl){

@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface ProvinceMapper {
 
-    List<City> selectCityByProvince(Integer provinceId);
+    List<City> selectAllCityByProvince(Integer provinceId);
 
     List<Province> selectAllProvince();
 }

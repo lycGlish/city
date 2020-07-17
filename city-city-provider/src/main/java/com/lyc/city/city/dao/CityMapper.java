@@ -12,5 +12,5 @@ import java.util.List;
 @Mapper
 public interface CityMapper {
 
-    List<District> selectDistrictByCity(Integer cityId);
+    List<District> selectAllDistrictByCity(Integer cityId);
 }

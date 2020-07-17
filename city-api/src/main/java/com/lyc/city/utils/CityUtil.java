@@ -8,6 +8,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+/**
+ * 百度地图城市名称转化坐标接口工具
+ * @author lyc
+ * @date 2020/7/6 9:46
+ */
+
 public class CityUtil {
     /**
      * @param 表示要访问的API的地址 =后面表示传递的参数

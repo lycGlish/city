@@ -7,138 +7,54 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * 预警消息实体类
+ * @author lyc
+ * @date 2020/7/6 9:46
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
+
+    // 预警消息id
     private Integer messageId;
 
+    // 预警消息来源
     private String messageName;
 
+    // 预警消息描述（人工修改/系统上传）
     private String messageDescription;
 
+    // 坐标id
     private Integer coordinateId;
 
+    // 位置id
     private Integer positionId;
 
+    // 创建时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
+    // 预警消息状态
     private String result;
 
+    // 创建人
     private String creator;
 
+    // 图片网页地址
     private String imageUrl;
 
+    // 坐标实体类
     private Coordinate coordinate;
 
+    // 省份实体类
     private Province province;
 
+    // 城市实体类
     private City city;
 
+    // 区/县实体类
     private District district;
-
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public Province getProvince() {
-        return province;
-    }
-
-    public void setProvince(Province province) {
-        this.province = province;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public District getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(District district) {
-        this.district = district;
-    }
-
-    public Integer getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(Integer messageId) {
-        this.messageId = messageId;
-    }
-
-    public String getMessageName() {
-        return messageName;
-    }
-
-    public void setMessageName(String messageName) {
-        this.messageName = messageName == null ? null : messageName.trim();
-    }
-
-    public String getMessageDescription() {
-        return messageDescription;
-    }
-
-    public void setMessageDescription(String messageDescription) {
-        this.messageDescription = messageDescription == null ? null : messageDescription.trim();
-    }
-
-    public Integer getCoordinateId() {
-        return coordinateId;
-    }
-
-    public void setCoordinateId(Integer coordinateId) {
-        this.coordinateId = coordinateId;
-    }
-
-    public Integer getPositionId() {
-        return positionId;
-    }
-
-    public void setPositionId(Integer positionId) {
-        this.positionId = positionId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result == null ? null : result.trim();
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl == null ? null : imageUrl.trim();
-    }
 }

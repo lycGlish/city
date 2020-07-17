@@ -9,10 +9,10 @@
     <sql id="Base_Column_List">
         city_id, province_id, city
     </sql>
-    <select id="selectDistrictByCity" parameterType="java.lang.Integer" resultType="com.lyc.city.bean.District">
-    select
-    city_district.district_id,city_district.district
-    from city_district
-    where city_id = #{cityId}
+    <select id="selectAllDistrictByCity" parameterType="java.lang.Integer" resultType="com.lyc.city.bean.District">
+        select
+            city_district.district_id,city_district.district
+        from city_district
+        where city_id = #{cityId}
     </select>
 </mapper>

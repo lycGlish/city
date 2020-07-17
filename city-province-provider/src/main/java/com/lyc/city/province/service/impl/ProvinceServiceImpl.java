@@ -25,7 +25,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public List<City> getCityByProvince(Integer provinceId) {
-        return provinceMapper.selectCityByProvince(provinceId);
+    public List<City> getAllCityByProvince(Integer provinceId) {
+        return provinceMapper.selectAllCityByProvince(provinceId);
     }
 }

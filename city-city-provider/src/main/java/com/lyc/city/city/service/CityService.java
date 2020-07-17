@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface CityService {
 
-    List<District> getDistrictByCity(Integer cityId);
+    List<District> getAllDistrictByCity(Integer cityId);
 }

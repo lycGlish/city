@@ -8,7 +8,7 @@
     <sql id="Base_Column_List">
     province_id, province
     </sql>
-    <select id="selectCityByProvince" parameterType="java.lang.Integer" resultType="com.lyc.city.bean.City">
+    <select id="selectAllCityByProvince" parameterType="java.lang.Integer" resultType="com.lyc.city.bean.City">
     select
     city_city.city_id,city_city.city
     from city_city

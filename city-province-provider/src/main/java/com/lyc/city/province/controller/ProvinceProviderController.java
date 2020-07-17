@@ -28,9 +28,9 @@ public class ProvinceProviderController {
         return provinceService.getAllProvince();
     }
 
-    @RequestMapping("/getCityByProvince")
+    @RequestMapping("/getAllCityByProvince")
     @ResponseBody
-    public List<City> getCityByProvince(Integer provinceId){
-        return provinceService.getCityByProvince(provinceId);
+    public List<City> getAllCityByProvince(Integer provinceId){
+        return provinceService.getAllCityByProvince(provinceId);
     }
 }

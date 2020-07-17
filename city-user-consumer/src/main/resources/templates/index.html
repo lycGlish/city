@@ -675,7 +675,7 @@
     function getCity() {
         $("#city").html('<option value="">----请选择城市----</option>');
         $.ajax({
-            url: "http://localhost:7081/getCityByProvince?provinceId=" + $("#province").val(),
+            url: "http://localhost:7081/getAllCityByProvince?provinceId=" + $("#province").val(),
             type: "GET",
             dataType: "json",
             success: function (data) {
@@ -697,7 +697,7 @@
     function getDistrict() {
         $("#district").html('<option value="">----请选择区域----</option>');
         $.ajax({
-            url: "http://localhost:7011/getDistrictByCity?cityId=" + $("#city").val(),
+            url: "http://localhost:7011/getAllDistrictByCity?cityId=" + $("#city").val(),
             type: "GET",
             dataType: "json",
             success: function (data) {

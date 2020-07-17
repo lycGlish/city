@@ -7,15 +7,22 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
+ * 区/县实体类
  * @author lyc
+ * @date 2020/7/6 9:46
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class District implements Serializable {
+
+    // 区/县id
     private Integer districtId;
 
+    // 城市id
     private Integer cityId;
 
+    // 区/县名称
     private String district;
 }

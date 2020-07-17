@@ -13,5 +13,5 @@ public interface ProvinceService {
 
     List<Province> getAllProvince();
 
-    List<City> getCityByProvince(Integer provinceId);
+    List<City> getAllCityByProvince(Integer provinceId);
 }

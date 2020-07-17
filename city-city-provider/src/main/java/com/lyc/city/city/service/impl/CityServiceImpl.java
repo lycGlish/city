@@ -19,7 +19,7 @@ public class CityServiceImpl implements CityService {
     private CityMapper cityMapper;
 
     @Override
-    public List<District> getDistrictByCity(Integer cityId) {
-        return cityMapper.selectDistrictByCity(cityId);
+    public List<District> getAllDistrictByCity(Integer cityId) {
+        return cityMapper.selectAllDistrictByCity(cityId);
     }
 }

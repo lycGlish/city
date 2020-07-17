@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * 获取图片自带属性工具
  * @author lyc
  * @date 2020/7/9 16:41
  */

@@ -8,6 +8,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+/**
+ * 道路图像识别接口工具
+ * @author lyc
+ * @date 2020/7/9 16:41
+ */
+
 public class PythonUtil {
     /**
      * @param 表示要访问的API的地址 =后面表示传递的参数
