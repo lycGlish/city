@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +35,11 @@ public class ImageProviderController {
     @Resource
     private ImageService imageService;
 
+    /**
+     * 更新图片信息
+     * @param result 道路图片状态
+     * @param imageId 图片id
+     */
     @PostMapping(value = "/updateImageResultByImageId")
     @ResponseBody
     public void updateImageResultByImageId(@RequestParam("modal_result") Integer result,
@@ -53,6 +57,10 @@ public class ImageProviderController {
         }
     }
 
+    /**
+     * 删除图片
+     * @param imageId 图片id
+     */
     @GetMapping(value = "/deleteImageByImageId")
     @ResponseBody
     public void deleteImageByImageId(@RequestParam("imageId") Integer imageId) {
@@ -62,21 +70,38 @@ public class ImageProviderController {
         }
     }
 
+    /**
+     * 获取指定来源图片（用户/摄像头）
+     * @param source 指定来源
+     * @return 来源图片集合
+     */
     @GetMapping(value = "/getAllSourceImage")
     @ResponseBody
     public List<Image> getAllSourceImage(String source) {
         return imageService.getAllSourceImage(source);
     }
 
+    /**
+     * 获取所有图片
+     * @return 所有图片集合
+     */
     @GetMapping(value = "/getAllImage")
     @ResponseBody
     public List<Image> getAllImage() {
         return imageService.getAllImage();
     }
 
+    /**
+     * 上传图片
+     * @param imageName 图片名称
+     * @param file 图片文件
+     * @param province 省份
+     * @param city 城市
+     * @param district 区/县
+     * @return
+     */
     @PostMapping(value = "/uploadImage")
-    public String uploadImage(String imageName, MultipartFile file, HttpSession session,
-                              Integer province, Integer city, Integer district) {
+    public String uploadImage(String imageName, MultipartFile file, Integer province, Integer city, Integer district) {
         Image image = new Image();
         image.setImageName(imageName);
         image.setImageDescription("机器识别");
@@ -271,7 +296,9 @@ public class ImageProviderController {
             // 成功则跳转至查看图片界面
             return "redirect:http://localhost:6021/index";
         } else {
-            session.setAttribute("status", "登录失败");
+            RedisUtil redisUtil = new RedisUtil();
+            // 状态码设置60s
+            redisUtil.setex("status",60,"上传");
             return "redirect:http://localhost:6011/status";
         }
     }

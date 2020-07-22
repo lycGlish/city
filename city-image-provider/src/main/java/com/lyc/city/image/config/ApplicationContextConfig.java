@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * 提供restTemplate的bean注册与负载均衡
  * @author lyc
  * @date 2020/7/9 11:58
  */
+
 @Configuration
 public class ApplicationContextConfig {
     @Bean

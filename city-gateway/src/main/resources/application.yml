@@ -1,0 +1,72 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: city-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.26.65.52:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: city-getway-provider
+          uri: lb://city-camera-provider
+          predicates:
+            - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-city-provider
+            predicates:
+              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-coordinate-provider
+            predicates:
+              - Path=/**
+#        - id: city-getway-provider
+#            uri: lb://city-district-provider
+#            predicates:
+#              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-image-provider
+            predicates:
+              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-manager-provider
+            predicates:
+              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-message-provider
+            predicates:
+              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-position-provider
+            predicates:
+              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-province-provider
+            predicates:
+              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-result-provider
+            predicates:
+              - Path=/**
+        - id: city-getway-provider
+            uri: lb://city-user-provider
+            predicates:
+              - Path=/**
+
+        - id: city-getway-consumer
+          uri: lb://city-manager-consumer
+          predicates:
+            - Path=/**
+        - id: city-getway-consumer
+            uri: lb://city-status-consumer
+            predicates:
+              - Path=/**
+        - id: city-getway-consumer
+            uri: lb://city-user-consumer
+            predicates:
+              - Path=/**

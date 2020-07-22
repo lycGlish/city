@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title th:text="${session.status}"></title>
+    <title th:text="${status}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/error.css">
@@ -346,7 +346,7 @@
             </svg>
         </div>
         <div class="col-md-6 align-self-center">
-            <h1 th:text="${session.status}"></h1>
+            <h1 th:text="${status}"></h1>
             <h2>五秒后跳转</h2>
             <a href="http://localhost:9401/index">
                 <button class="btn green">返回首页</button>

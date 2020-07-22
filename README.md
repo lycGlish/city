@@ -1,22 +1,28 @@
-#2.0.0springcloud分布式（更新中）  
+#2.1.0 SpringCloud分布式（更新中）  
+##更新内容  
+    1.新增city-gateway模块实现网关  
+    2.添加redis，通过jedis工具实现操作，通过redis实现显示管理员姓名与状态码传递  
+    3.更新image-provider,manager-consumer,manager-provider注释  
+    4.引入shiro依赖，准备解决网站权限需求  
+    5.sql更新  
 ##已发现需要改进问题  
+    传递管理员姓名与状态码不能直接通过String字符传递，要存入session传递session（下版本修正）  
     1.摄像头自动采集图片功能  
     2.定时处理消息预警过期功能  
     3.python图像识别能力优化  
-    4.管理员采用gateway或shiro实现登录验证  
-    5.整合redis解决主页读取数据库信息缓慢问题  
-##2.0.2  
-    整合nacos+restTemplate实现分布式架构  
-    更新city-api，camera-provider，coordinator-provider注解  
-    部分方法名修改,防止歧义  
+    4.管理员采用shiro实现登录验证  
+    5.全局异常捕捉功能  
+-----------------------------------------------------------------------------------------------------
+#SpringCloud分布式整体框架  
 ##项目api  
     1.基于TensorFlow的图片识别接口 http://120.26.65.52:5000/detect?url=  
     2.基于FastDFS的分布式文件存储服务 http://120.26.65.52:22122 配置文件见fdfs_client.conf  
     3.基于百度地图的经纬度搜索 http://api.map.baidu.com/geocoding/v3/?address=  
 ##项目模块  
 ###工具模块  
-	1.city-api						总工程的所有实体类与工具类  
-###后端服务模块
+	1.city-api					    	总工程的所有实体类与工具类  
+	2.city-gateway              9001    网关  
+###后端服务模块  
 	1.city-camera-provider		7001	摄像头  
 	2.city-city-provider		7011	城市  
 	3.city-coordinate-provider	7021	坐标  
@@ -36,7 +42,7 @@
     1.数据库表是根目录的city.sql  
 ----------------------------------------------------------------------------------------------------------  
 
-#1.0.0springboot发布版  
+#1.0.0 Springboot最终版  
 ##项目api  
     1.基于TensorFlow的图片识别接口 http://120.26.65.52:5000/detect?url=  
     2.基于FastDFS的分布式文件存储服务 http://120.26.65.52:22122 配置文件见fdfs_client.conf  

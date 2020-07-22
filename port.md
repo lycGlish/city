@@ -15,3 +15,6 @@
     city-manager-consumer    6001   9402
     city-status-consumer     6011   9403
     city-user-consumer       6021   9401
+    
+    
+    city-gateway             9001

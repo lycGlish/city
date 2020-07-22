@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 16/07/2020 16:45:51
+ Date: 22/07/2020 17:03:18
 */
 
 SET NAMES utf8mb4;
@@ -505,7 +505,7 @@ CREATE TABLE `city_image`  (
   CONSTRAINT `image_position_id` FOREIGN KEY (`position_id`) REFERENCES `city_position` (`position_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `image_result_id` FOREIGN KEY (`result_id`) REFERENCES `city_result` (`result_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `image_user_id` FOREIGN KEY (`user_id`) REFERENCES `city_user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_image
@@ -562,12 +562,14 @@ CREATE TABLE `city_manager`  (
   PRIMARY KEY (`manager_id`) USING BTREE,
   UNIQUE INDEX `manager_name`(`manager_name`) USING BTREE,
   UNIQUE INDEX `email`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_manager
 -- ----------------------------
-INSERT INTO `city_manager` VALUES (1, '张三', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6RhCKANmBPAAIvYDWV9Lg468.jpg', '1746661428@qq.com', '2020-04-11 16:47:31');
+INSERT INTO `city_manager` VALUES (1, '林宇聪', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6RhCKANmBPAAIvYDWV9Lg468.jpg', '1746661428@qq.com', '2020-04-11 16:47:31');
+INSERT INTO `city_manager` VALUES (2, '朱经莹', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6RhCKANmBPAAIvYDWV9Lg468.jpg', '841564948@qq.com', '2020-07-20 20:48:21');
+INSERT INTO `city_manager` VALUES (3, '叶健安', 'e10adc3949ba59abbe56e057f20f883e', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6RhCKANmBPAAIvYDWV9Lg468.jpg', '4818488715@qq.com', '2020-07-20 20:49:20');
 
 -- ----------------------------
 -- Table structure for city_message
@@ -584,33 +586,33 @@ CREATE TABLE `city_message`  (
   `creator` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `image_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of city_message
 -- ----------------------------
 INSERT INTO `city_message` VALUES (16, '系统上传', '人工修改', 22, 8, '2020-05-30 10:36:13', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwaCAdIe9AAARRVDCAF4056.jpg');
-INSERT INTO `city_message` VALUES (17, '系统上传', '系统识别', 23, 9, '2020-05-07 16:08:16', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwe-AECH8AAAQPUEp19k202.jpg');
-INSERT INTO `city_message` VALUES (18, '系统上传', '系统识别', 24, 10, '2020-05-07 16:09:30', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwjmAcbKzAAAQqeCx1R0275.jpg');
-INSERT INTO `city_message` VALUES (19, '系统上传', '系统识别', 36, 9, '2020-05-08 16:52:36', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61HdCAOczxAAAO0GEoSZI055.jpg');
-INSERT INTO `city_message` VALUES (20, '系统上传', '系统识别', 37, 1, '2020-05-09 14:56:17', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62VAqAAAwYAAAPPRqhgYE816.jpg');
-INSERT INTO `city_message` VALUES (21, '系统上传', '系统识别', 32, 1, '2020-05-09 14:56:57', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62VDeALBvxAAAPrDTchVI681.jpg');
-INSERT INTO `city_message` VALUES (32, '系统上传', '系统识别', 40, 1, '2020-05-09 15:57:10', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62YgaAN2hIAAAPuwEjjzk955.jpg');
-INSERT INTO `city_message` VALUES (33, '系统上传', '系统识别', 41, 1, '2020-05-09 16:01:54', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62Y22AW83OAAAQUPDJQoc339.jpg');
+INSERT INTO `city_message` VALUES (17, '系统上传', '系统上传', 23, 9, '2020-05-07 16:08:16', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwe-AECH8AAAQPUEp19k202.jpg');
+INSERT INTO `city_message` VALUES (18, '系统上传', '系统上传', 24, 10, '2020-05-07 16:09:30', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l6zwjmAcbKzAAAQqeCx1R0275.jpg');
+INSERT INTO `city_message` VALUES (19, '系统上传', '系统上传', 36, 9, '2020-05-08 16:52:36', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l61HdCAOczxAAAO0GEoSZI055.jpg');
+INSERT INTO `city_message` VALUES (20, '系统上传', '系统上传', 37, 1, '2020-05-09 14:56:17', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62VAqAAAwYAAAPPRqhgYE816.jpg');
+INSERT INTO `city_message` VALUES (21, '系统上传', '系统上传', 32, 1, '2020-05-09 14:56:57', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62VDeALBvxAAAPrDTchVI681.jpg');
+INSERT INTO `city_message` VALUES (32, '系统上传', '系统上传', 40, 1, '2020-05-09 15:57:10', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62YgaAN2hIAAAPuwEjjzk955.jpg');
+INSERT INTO `city_message` VALUES (33, '系统上传', '系统上传', 41, 1, '2020-05-09 16:01:54', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/00/rBAc3l62Y22AW83OAAAQUPDJQoc339.jpg');
 INSERT INTO `city_message` VALUES (35, '系统上传', '系统上传', 50, 1, '2020-05-16 14:03:35', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_gjKAZzYXAAAPzNwq23Q476.jpg');
 INSERT INTO `city_message` VALUES (36, '系统上传', '系统上传', 40, 1, '2020-05-16 14:05:41', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l6_grKAU1AcAAARt8Ky9k8490.jpg');
-INSERT INTO `city_message` VALUES (39, '系统上传', '系统识别', 58, 1, '2020-05-17 21:55:55', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7BQmaAYaR-AAAMgqCkA1g424.jpg');
-INSERT INTO `city_message` VALUES (40, '系统上传', '系统识别', 63, 16, '2020-05-24 14:38:48', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7KFnaADmUZAAQaY5QMjq0405.jpg');
-INSERT INTO `city_message` VALUES (46, '系统上传', '系统识别', 75, 21, '2020-06-15 23:55:44', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nmf6AdProAAJxDax3V-I119.jpg');
-INSERT INTO `city_message` VALUES (47, '系统上传', '系统识别', 75, 21, '2020-06-16 00:07:45', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnNCAACKSAALc9rxXdSY104.jpg');
-INSERT INTO `city_message` VALUES (48, '系统上传', '系统识别', 75, 21, '2020-06-16 00:08:33', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnP-AXn8gAAK3luLDTJI394.jpg');
-INSERT INTO `city_message` VALUES (49, '系统上传', '系统识别', 75, 21, '2020-06-16 00:09:09', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnSOAD-mdAAJx1dMaLzg700.jpg');
-INSERT INTO `city_message` VALUES (50, '系统上传', '系统识别', 75, 21, '2020-06-16 00:10:15', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnWaAWnWRAAJxgR7BwgQ416.jpg');
-INSERT INTO `city_message` VALUES (51, '系统上传', '系统识别', 75, 21, '2020-06-16 00:10:31', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnXaABMjjAAJxDax3V-I593.jpg');
-INSERT INTO `city_message` VALUES (52, '系统上传', '系统识别', 77, 22, '2020-06-16 00:11:03', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnZaALuKTAAKShnNhEzM400.jpg');
-INSERT INTO `city_message` VALUES (53, '系统上传', '系统识别', 77, 22, '2020-06-16 00:12:27', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnemAUJxOAAJOlrIj37I705.jpg');
-INSERT INTO `city_message` VALUES (54, '系统上传', '系统识别', 77, 22, '2020-06-16 00:12:51', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nngGAdGhZAAJw9Di7HHg544.jpg');
-INSERT INTO `city_message` VALUES (55, '系统上传', '系统识别', 77, 22, '2020-06-16 00:13:36', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nni-AfjDUAAM7BZEBK0M404.jpg');
+INSERT INTO `city_message` VALUES (39, '系统上传', '系统上传', 58, 1, '2020-05-17 21:55:55', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7BQmaAYaR-AAAMgqCkA1g424.jpg');
+INSERT INTO `city_message` VALUES (40, '系统上传', '系统上传', 63, 16, '2020-05-24 14:38:48', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7KFnaADmUZAAQaY5QMjq0405.jpg');
+INSERT INTO `city_message` VALUES (46, '系统上传', '系统上传', 75, 21, '2020-06-15 23:55:44', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nmf6AdProAAJxDax3V-I119.jpg');
+INSERT INTO `city_message` VALUES (47, '系统上传', '系统上传', 75, 21, '2020-06-16 00:07:45', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnNCAACKSAALc9rxXdSY104.jpg');
+INSERT INTO `city_message` VALUES (48, '系统上传', '系统上传', 75, 21, '2020-06-16 00:08:33', '内涝', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnP-AXn8gAAK3luLDTJI394.jpg');
+INSERT INTO `city_message` VALUES (49, '系统上传', '系统上传', 75, 21, '2020-06-16 00:09:09', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnSOAD-mdAAJx1dMaLzg700.jpg');
+INSERT INTO `city_message` VALUES (50, '系统上传', '系统上传', 75, 21, '2020-06-16 00:10:15', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnWaAWnWRAAJxgR7BwgQ416.jpg');
+INSERT INTO `city_message` VALUES (51, '系统上传', '系统上传', 75, 21, '2020-06-16 00:10:31', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnXaABMjjAAJxDax3V-I593.jpg');
+INSERT INTO `city_message` VALUES (52, '系统上传', '系统上传', 77, 22, '2020-06-16 00:11:03', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnZaALuKTAAKShnNhEzM400.jpg');
+INSERT INTO `city_message` VALUES (53, '系统上传', '系统上传', 77, 22, '2020-06-16 00:12:27', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nnemAUJxOAAJOlrIj37I705.jpg');
+INSERT INTO `city_message` VALUES (54, '系统上传', '系统上传', 77, 22, '2020-06-16 00:12:51', '积水', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nngGAdGhZAAJw9Di7HHg544.jpg');
+INSERT INTO `city_message` VALUES (55, '系统上传', '系统上传', 77, 22, '2020-06-16 00:13:36', '冰雪', '匿名', 'http://120.26.65.52:80/group1/M00/00/01/rBAc3l7nni-AfjDUAAM7BZEBK0M404.jpg');
 
 -- ----------------------------
 -- Table structure for city_position

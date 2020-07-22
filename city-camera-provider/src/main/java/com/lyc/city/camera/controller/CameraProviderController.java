@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lyc.city.bean.*;
 import com.lyc.city.camera.service.CameraService;
 import com.lyc.city.utils.CityUtil;
+import com.lyc.city.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -81,12 +82,10 @@ public class CameraProviderController {
      * @param province 省份
      * @param city 城市
      * @param district 区/县
-     * @param request request对象
      * @return 查看摄像头信息页面
      */
     @PostMapping("/uploadCamera")
-    public String uploadCamera(String cameraName, Integer province, Integer city, Integer district, HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
+    public String uploadCamera(String cameraName, Integer province, Integer city, Integer district) {
         // 封装camera类
         Camera camera = new Camera();
         camera.setCameraName(cameraName);
@@ -153,8 +152,10 @@ public class CameraProviderController {
                 log.info("未找到相匹配的经纬度！");
                 // 没有搜索到用户输入的街道信息，填入省市县坐标
                 coordinateApi = CityUtil.httpUrlConnectionPost(provinceName + cityName + districtName);
-                coordinateApi = coordinateApi.substring(27);
-                coordinateApi = coordinateApi.substring(0, coordinateApi.length() - 1);
+                if(coordinateApi!=null){
+                    coordinateApi = coordinateApi.substring(27);
+                    coordinateApi = coordinateApi.substring(0, coordinateApi.length() - 1);
+                }
                 json = JSONObject.parseObject(coordinateApi);
                 if (json.get("status").toString().equals("0")) {
                     latitude = json.getJSONObject("result").getJSONObject("location").getString("lng");
@@ -200,7 +201,9 @@ public class CameraProviderController {
             log.info("上传摄像头成功！");
             return "redirect:http://localhost:6001/toCamera";
         } else {
-            session.setAttribute("status", "上传摄像头失败");
+            RedisUtil redisUtil = new RedisUtil();
+            // 状态码设置60s
+            redisUtil.setex("status",60,"上传摄像头失败");
             return "redirect:http://localhost:6011/status";
         }
     }
