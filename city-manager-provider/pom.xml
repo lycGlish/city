@@ -18,11 +18,6 @@
             <artifactId>city-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- shiro -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-        </dependency>
         <!-- fastdfs -->
         <dependency>
             <groupId>org.csource</groupId>

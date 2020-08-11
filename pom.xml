@@ -50,7 +50,6 @@
         <httpclient.version>4.5.8</httpclient.version>
         <fastjson.version>1.2.54</fastjson.version>
         <metadata-extractor.version>2.6.2</metadata-extractor.version>
-        <shiro.version>1.5.3</shiro.version>
         <jedis.version>3.3.0</jedis.version>
     </properties>
 
@@ -61,12 +60,6 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
-            </dependency>
-            <!-- shiro -->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>${shiro.version}</version>
             </dependency>
 
             <dependency>

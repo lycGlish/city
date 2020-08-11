@@ -148,4 +148,9 @@ public class ManagerConsumerController {
             return "redirect:http://localhost:6011/status";
         }
     }
+
+    @GetMapping("/noLogin")
+    public String toLogin(){
+        return "redirect:http://localhost:6021/index";
+    }
 }
