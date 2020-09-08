@@ -13,60 +13,60 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: city-getway-provider
+        - id: city-camera-provider
           uri: lb://city-camera-provider
           predicates:
             - Path=/**
-        - id: city-getway-provider
+        - id: city-city-provider
             uri: lb://city-city-provider
             predicates:
               - Path=/**
-        - id: city-getway-provider
+        - id: city-coordinate-provider
             uri: lb://city-coordinate-provider
             predicates:
               - Path=/**
-#        - id: city-getway-provider
+#        - id: city-district-provider
 #            uri: lb://city-district-provider
 #            predicates:
 #              - Path=/**
-        - id: city-getway-provider
+        - id: city-image-provider
             uri: lb://city-image-provider
             predicates:
               - Path=/**
-        - id: city-getway-provider
+        - id: city-manager-provider
             uri: lb://city-manager-provider
             predicates:
               - Path=/**
-        - id: city-getway-provider
+        - id: city-message-provider
             uri: lb://city-message-provider
             predicates:
               - Path=/**
-        - id: city-getway-provider
+        - id: city-position-provider
             uri: lb://city-position-provider
             predicates:
               - Path=/**
-        - id: city-getway-provider
+        - id: city-province-provider
             uri: lb://city-province-provider
             predicates:
               - Path=/**
-        - id: city-getway-provider
+        - id: city-result-provider
             uri: lb://city-result-provider
             predicates:
               - Path=/**
-        - id: city-getway-provider
+        - id: city-user-provider
             uri: lb://city-user-provider
             predicates:
               - Path=/**
 
-        - id: city-getway-consumer
+        - id: city-manager-consumer
           uri: lb://city-manager-consumer
           predicates:
             - Path=/**
-        - id: city-getway-consumer
+        - id: city-status-consumer
             uri: lb://city-status-consumer
             predicates:
               - Path=/**
-        - id: city-getway-consumer
+        - id: city-user-consumer
             uri: lb://city-user-consumer
             predicates:
               - Path=/**

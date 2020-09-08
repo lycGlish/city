@@ -1,4 +1,6 @@
-# 2.1.1 SpringCloud分布式（更新中）  
+# 2.1.1 SpringCloud分布式（暂停更新）  
+
+    因技术选型重构，新开一个项目地址：https://github.com/lycGlish/CloudCity
 
 ## 更新内容  
 
