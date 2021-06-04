@@ -47,7 +47,7 @@
         <mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
         <hutool-all.version>5.1.0</hutool-all.version>
         <fastDFS.version>1.29-SNAPSHOT</fastDFS.version>
-        <httpclient.version>4.5.8</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <fastjson.version>1.2.54</fastjson.version>
         <metadata-extractor.version>2.6.2</metadata-extractor.version>
         <jedis.version>3.3.0</jedis.version>
